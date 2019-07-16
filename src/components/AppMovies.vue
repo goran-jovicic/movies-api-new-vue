@@ -1,7 +1,10 @@
 <template>
   <div>
+    <hr>
     <MovieSearch @searchTermUpdated="setSearchTerm"></MovieSearch>
+    <hr>
     <ul>
+      <li v-if="filteredMovies.length === 0 "> There is no movie with a title like that </li>
       <li v-for="(movie, index) in filteredMovies" :key="index">
         <MovieRow :movie="movie"></MovieRow>
       </li>
@@ -35,18 +38,16 @@ export default {
     });
   },
 
-  methods : {
+  methods: {
     setSearchTerm(term) {
-      this.term = term
+      this.term = term;
     }
   },
 
   computed: {
     filteredMovies() {
       return this.movies.filter(movie => {
-        return movie.title
-          .toLowerCase()
-          .includes(this.term.toLowerCase());
+          return movie.title.toLowerCase().includes(this.term.toLowerCase())
       });
     }
   }
@@ -56,5 +57,9 @@ export default {
 <style>
 li {
   list-style: none;
+}
+
+body {
+  margin : 1rem;
 }
 </style>
