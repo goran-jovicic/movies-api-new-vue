@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Search movies by title : </p>
+    <p>Search movies by title :</p>
     <input type="text" placeholder="Search.." v-model="searchTerm" v-on:input="handleSearch" />
     <button class="btn btn-primary" type="submit">Search</button>
   </div>

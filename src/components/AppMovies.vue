@@ -3,10 +3,13 @@
     <hr>
     <MovieSearch @searchTermUpdated="setSearchTerm"></MovieSearch>
     <hr>
+    <button>Select all </button>
+    <button>Deselect all </button>
     <ul>
-      <li v-if="filteredMovies.length === 0 "> There is no movie with a title like that </li>
+      <li>Selected movie count : {{ selectedList.length }}</li>
+      <li class="list-group-item list-group-item-danger" v-if="filteredMovies.length === 0 "> There is no movie with a title like that </li>
       <li v-for="(movie, index) in filteredMovies" :key="index">
-        <MovieRow :movie="movie"></MovieRow>
+        <MovieRow :movie="movie" @selectMovie="selectedMovies"></MovieRow>
       </li>
     </ul>
   </div>
@@ -26,7 +29,8 @@ export default {
   data() {
     return {
       movies: [],
-      term: ""
+      term: "",
+      selectedList : []
     };
   },
 
@@ -41,6 +45,13 @@ export default {
   methods: {
     setSearchTerm(term) {
       this.term = term;
+    },
+
+    selectedMovies(movieId) {
+      if(this.selectedList.includes(movieId)){
+        return
+      }
+      this.selectedList.push(movieId)
     }
   },
 
@@ -61,5 +72,6 @@ li {
 
 body {
   margin : 1rem;
+  text-align: center;
 }
 </style>
