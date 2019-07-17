@@ -1,10 +1,21 @@
 <template>
   <div>
-    <hr>
-    <MovieSearch @searchTermUpdated="setSearchTerm"></MovieSearch>
-    <hr>
-    <button>Select all </button>
-    <button>Deselect all </button>
+    <div>
+      <hr>
+      <MovieSearch @searchTermUpdated="setSearchTerm"></MovieSearch>
+      <hr>
+    </div>
+    <div>
+      <button @click="selectAll">Select all </button>
+      <button @click="deselectAll">Deselect all </button>
+      <hr>
+    </div>
+    <div>
+      <button @click="sortByNameAsc">Sort by name asc</button>
+      <button @click="sortByNameDesc">Sort by name desc</button>
+      <button @click="sortByDurAsc">Sort by duration asc</button>
+      <button @click="sortByDurDesc">Sort by duration desc</button>
+    </div>
     <ul>
       <li>Selected movie count : {{ selectedList.length }}</li>
       <li class="list-group-item list-group-item-danger" v-if="filteredMovies.length === 0 "> There is no movie with a title like that </li>
@@ -52,6 +63,30 @@ export default {
         return
       }
       this.selectedList.push(movieId)
+    },
+
+    selectAll(){
+      this.selectedList = this.filteredMovies.map(filteredMovie => filteredMovie.id)
+    },
+
+    deselectAll(){
+      this.selectedList = [];
+    },
+
+    sortByNameAsc() {
+      
+    },
+
+    sortByNameDesc() {
+
+    },
+
+    sortByDurAsc(){
+
+    },
+
+    sortByDurDesc(){
+
     }
   },
 
@@ -60,7 +95,7 @@ export default {
       return this.movies.filter(movie => {
           return movie.title.toLowerCase().includes(this.term.toLowerCase())
       });
-    }
+    },
   }
 };
 </script>
